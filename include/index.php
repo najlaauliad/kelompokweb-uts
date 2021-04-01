@@ -51,115 +51,73 @@ while ($data_b = mysqli_fetch_assoc($query_blog)) {
             </a>
           </div>
     </section>
+    <?php
+    $sql_k = "SELECT `judul`,`isi` FROM `konten` WHERE
+    `id_konten`='2'";
+    $query_k = mysqli_query($koneksi,$sql_k);
+    while($data_k = mysqli_fetch_row($query_k)){
+    $judul_konten = $data_k[0];
+    $isi_konten = $data_k[1];
+    }
+    ?>
     <section id="notes-item">
-        <div class="container">
-            <div class="row featurette">
-                <div class="col-md-7">
-                  <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-                  <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-                </div>
-                <div class="col-md-5">
-                    <img src="images/undraw_book_lover_mkck.png" class="img-fluid mx-auto featurette-image">
-                  <!--<svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>-->
-                </div>
-            </div>
-            <hr class="featurette-divider"> 
-        </div>
+      <div class="container">
+      <div class="row featurette">
+      <div class="col-md-7">
+      <h2 class="featurette-heading">
+      <?php echo $judul_konten;?></span></h2>
+      <p class="lead"><?php echo $isi_konten;?></p>
+      </div>
+      <div class="col-md-5">
+      <img src="images/undraw_book_lover_mkck.png"
+      class="img-fluid mx-auto featurette-image">
+      </div>
+      </div>
+      <hr class="featurette-divider">
+      </div>
     </section><!-- #notes-item -->
     
     <section id="product-item">
-        <div class="container">
-            <h2>Koleksi Terbaru</h2>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                       <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-      
-              
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                      <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                      <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                         <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-            </div>
-          </div>
+      <div class="container">
+      <h2>Koleksi Terbaru</h2>
+      <div class="row">
+      <?php
+      $sql_b = "SELECT `b`.`id_buku`, `b`.`judul`, `b`.`cover`,
+      `p`.`penerbit` FROM `buku` `b`
+      INNER JOIN `penerbit` `p` ON `b`.`id_penerbit` =
+      `p`.`id_penerbit` ORDER BY `b`.`id_buku` DESC LIMIT 6";
+      //echo $sql_b;
+      $query_b = mysqli_query($koneksi,$sql_b);
+      while($data_b = mysqli_fetch_row($query_b)){
+      $id_buku = $data_b[0];
+      $judul_buku = $data_b[1];
+      $cover = $data_b[2];
+      $penerbit = $data_b[3];
+      ?>
+      <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+      <img src="admin/cover/<?php echo $cover;?>"
+      class="img-fluid" alt="<?php echo $judul_buku;?>"
+      title="<?php echo $judul_buku;?>">
+      <div class="card-body bg-warning">
+      <p class="card-text"><?php echo $judul_buku;?></p>
+      <div class="d-flex justify-content-between
+      align-items-center">
+      <div class="btn-group">
+      <a href="index.php?include=detail-buku&data=
+
+      <?php echo $id_buku;?>" class="btn
+      btn-primary stretched-link">Detail</a>
+      </div>
+      <small class="text-muted">
+      <?php echo $penerbit;?></small>
+      </div>
+      </div>
+      </div>
+      </div>
+      <?php }?>
+      </div>
+      </div>
     </section><br><br><!-- #product-item -->
     
     <section id="quotes-item" class="bg-light" style="min-height: 80px;padding:40px 0px 0px 0px;">
@@ -171,28 +129,50 @@ while ($data_b = mysqli_fetch_assoc($query_blog)) {
         </div>
     </section><br><br>
     <section id="blog-item" class="mb-4">
-        <div class="container">
-            <h2>Blog Terbaru</h2><br>
-            <div class="row mb-2">
-            <?php foreach ($data_blog as $blog) {
-                // var_dump($blog['id_blog']); die;
-                ?>
-                <div class="col-md-6">
-                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        <div class="col p-4 d-flex flex-column position-static bg-light">
-                        <strong class="d-inline-block mb-2 text-success"><?= $blog['judul'] ?></strong>
-                        <h3 class="mb-0"><a href="detail-blog-id-<?= $blog['id_blog']; ?>" ><?= pecah_kalimat($blog['isi']) ?></a></h3>
-                        <div class="mb-1 text-muted"><?= tanggal_indonesia($blog['tanggal']) ?></div>
-                        <!--<p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>-->
-                        <!-- <a href="#" class="stretched-link">Continue reading</a> -->
-                        </div>
-                        <div class="col-auto d-none d-lg-block">
-                            <img src="images/blog.jpg" class="img-fluid" title="book title here">
-                        </div>
-                    </div>
-                </div>
-              <?php } ?> 
+      <div class="container">
+        <h2>Blog Terbaru</h2><br>
+        <div class="row mb-2">
+        <?php
+        $sql_l = "SELECT `b`.`id_blog`, `b`.`judul`,
+        DATE_FORMAT(`b`.`tanggal`, '%d-%m-%Y'),
+        `k`.`kategori_blog` FROM `blog` `b` INNER JOIN
+        `kategori_blog` `k`
+        ON `b`.`id_kategori_blog` = `k`.`id_kategori_blog`
+        ORDER BY `b`.`id_blog` DESC";
+        $query_l = mysqli_query($koneksi,$sql_l);
+        while($data_l = mysqli_fetch_row($query_l)){
+        $id_blog = $data_l[0];
+        $judul_blog = $data_l[1];
+        $tanggal = $data_l[2];
+        $kategori_blog = $data_l[3];
+        ?>
+        <div class="col-md-6">
+        <div class="row no-gutters border rounded overflow-
 
-            </div>
+        hidden flex-md-row mb-4 shadow-sm h-md-250
+        position-relative">
+
+        <div class="col p-4 d-flex flex-column position-
+
+        static bg-light">
+
+        <strong class="d-inline-block mb-2 text-success">
+
+        <?php echo $kategori_blog;?></strong>
+        <h3 class="mb-0"><a href="index.php?include=detail-
+        blog&data=<?php echo $id_blog; ?>">
+        <?php echo $judul_blog;?></a></h3>
+        <div class="mb-1 text-muted">
+        <?php echo $tanggal;?></div>
         </div>
+
+        <div class="col-auto d-none d-lg-block">
+        <img src="images/blog.jpg" class="img-fluid"
+        title="book title here">
+        </div>
+        </div>
+        </div>
+        <?php }?>
+        </div>
+      </div>
     </section>
