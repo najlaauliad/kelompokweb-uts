@@ -11,11 +11,11 @@
 
       if(isset($_GET["include"])){
         $include = $_GET["include"];
-      if($include=="detail-buku"){
-        include("include/detailbuku.php");
-      }else{
-        include("include/index.php");
-      }
+        if($include=="detail-buku"){
+          include("include/detailbuku.php");
+        }else{
+          include("include/index.php");
+        }
       }else{
         include("include/index.php");
       }
