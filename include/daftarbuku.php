@@ -1,290 +1,91 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<?php
+if (isset($_GET['data'])) {
+  $data = $_GET['data'];
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+  $sql_k = "SELECT `kategori_buku` FROM `kategori_buku` WHERE `id_kategori_buku`= '$data'";
+  $query_k = mysqli_query($koneksi, $sql_k);
+  while ($data_k = mysqli_fetch_row($query_k)) {
+    $kat = $data_k[0];
+  }
+}
+?>
+<section id="blog-header">
+  <div class="container">
+    <h1 class="text-white">DAFTAR BUKU</h1>
+  </div>
+</section><br><br>
 
-    <!-- Global CSS-->
-    <link rel="stylesheet" href="dist/css/style.css">
-
-    <title>Katalog Buku</title>
-  </head>
-  <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-        <a class="navbar-brand" href="#">Katalog Buku</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="navbarsExample07">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="aboutus.php">About Us</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kategori</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown07">
-                    <a class="dropdown-item" href="daftarbuku.php">Java</a>
-                    <a class="dropdown-item" href="daftarbuku.php">PHP</a>
-                    <a class="dropdown-item" href="daftarbuku.php">HTML</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="blog.php">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contactus.php">Contact Us</a>
-                </li>
-            </ul>
-            <form class="form-inline mt-2 mt-md-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-        </div>
-    </nav>
-    <section id="blog-header">
-      <div class="container">
-        <h1 class="text-white">DAFTAR BUKU</h1>
-      </div>
-    </section><br><br>
-    
-    <section id="katalog-item">
-      <main role="main" class="container">
-        <h2 class="text-primary">CATEGORIES: Website</h2><br><br>
+<section id="katalog-item">
+  <main role="main" class="container">
+    <h2 class="text-primary">CATEGORIES: <?php echo $kat; ?></h2><br><br>
+    <div class="row">
+      <div class="col-md-9 katalog-main">
         <div class="row">
-          <div class="col-md-9 katalog-main">
-            <div class="row">
-              
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                      <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                      <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                      <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-      
-              
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                      <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                      <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                      <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                      <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                      <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                      <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div><div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                      <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                      <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books">
-                  <div class="card-body bg-warning">
-                    <p class="card-text">MENGUASAI CODEIGNITER 4 KASUS MEMBUAT APLIKASI PMB KAMPUS</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                      <a href="detailbuku.php" class="btn btn-primary stretched-link">Detail</a>
-                      </div>
-                      <small class="text-muted">Lokomedia</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-            <div class="col-sm-12">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                      <li class="page-item"><a class="page-link" href="" ><strong>first</strong></a></li>
-                      <li class="page-item"><a class="page-link"  href="">1</a></li> 
-                      <li class="page-item active"><a class="page-link"  href="">2</a></li> 
-                      <li class="page-item"><a class="page-link"  href="">3</a></li> 
-                      <li class="page-item"><a class="page-link" href=""><strong>last</strong></a></li>
-                  </ul>
-                </nav>
-            </div>  
+          <?php
+          $sql_b = "SELECT `b`.`id_buku`, `b`.`judul`, `b`.`cover`,`p`.`penerbit` FROM `buku` `b` INNER JOIN `penerbit` `p` ON `b`.`id_penerbit` = `p`.`id_penerbit` WHERE `b`.`id_kategori_buku`= '$data' ORDER BY `b`.`id_buku`";
+          //echo $sql_b;
+          $query_b = mysqli_query($koneksi, $sql_b);
+          while ($data_b = mysqli_fetch_row($query_b)) {
+            $id_buku = $data_b[0];
+            $judul_buku = $data_b[1];
+            $cover = $data_b[2];
+            $penerbit = $data_b[3];
+          ?>
 
-            </div><!-- .row-->
-          </div><!-- /.katalog-main -->
-      
-          <aside class="col-md-3 katalog-sidebar">
-      
-            <div class="pl-4 pb-4">
-              <h4 class="font-italic">Kategori</h4>
-              <ol class="list-unstyled mb-0">
-                <li><a href="#">Umum</a></li>
-                <li><a href="#">PHP</a></li>
-                <li><a href="#">Java</a></li>
-                <li><a href="#">Database</a></li>
-                <li><a href="#">Techno</a></li>
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <img src="admin/cover/<?php echo $cover ?>" class="img-fluid" alt="Books Collection" title="Books">
+                <div class="card-body bg-warning">
+                  <p class="card-text"><?php echo $judul_buku ?></p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="index.php?include=detail-buku&data=<?php echo $id_buku ?>" class="btn btn-primary stretched-link">Detail</a>
+                    </div>
+                    <small class="text-muted"><?php echo $penerbit ?></small>
+                  </div>
+                </div>
+              </div>
             </div>
-      
-            <div class="p-4">
-              <h4 class="font-italic">Tag</h4>
-              <ol class="list-unstyled">
-                <li><a href="#">PHP</a></li>
-                <li><a href="#">MySQL</a></li>
-                <li><a href="#">Javascript</a></li>
-              </ol>
-            </div>
-          </aside> <!-- /.katalog-sidebar -->
-      
-        </div><!-- /.row -->
-      </main><!-- /.container -->
-    </section><br><br>
-    <footer class="bg-primary text-dark">
-        <div class="container">
-          <p class="float-right">
-            <a href="#" class="text-white">Back to top</a>
-          </p>
-          <p>&copy; <b>2021 Vokasi UB.</b> All rights reserved.</p>
+          <?php } ?>
+        </div><!-- .row-->
+      </div><!-- /.katalog-main -->
+
+      <aside class="col-md-3 katalog-sidebar">
+
+        <div class="pl-4 pb-4">
+          <h4 class="font-italic">Kategori</h4>
+          <ol class="list-unstyled mb-0">
+            <?php
+            $sql_k = "SELECT `id_kategori_buku`,`kategori_buku`FROM `kategori_buku`ORDER BY `kategori_buku`";
+            $query_k = mysqli_query($koneksi, $sql_k);
+            while ($data_k = mysqli_fetch_row($query_k)) {
+              $id_kat = $data_k[0];
+              $nama_kat = $data_k[1];
+            ?>
+              <li><a href="index.php?include=daftar-buku-kategori&data=<?php echo $id_kat; ?>">
+                  <?php echo $nama_kat; ?></a></li>
+            <?php } ?>
+          </ol>
         </div>
-    </footer>
 
-    <!-- Optional JavaScript; choose one of the two! -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
+        <div class="p-4">
+          <h4 class="font-italic">Tag</h4>
+          <ol class="list-unstyled">
+            <?php
+            $sql_t = "SELECT `id_tag`,`tag` FROM `tag`ORDER BY `tag`";
+            $query_t = mysqli_query($koneksi, $sql_t);
+            while ($data_t = mysqli_fetch_row($query_t)) {
+              $id_tag = $data_t[0];
+              $nama_tag = $data_t[1];
+            ?>
+              <li><a href="index.php?include=daftar-buku-tag&data=<?php echo $id_tag; ?>">
+                  <?php echo $nama_tag; ?></a></li>
+            <?php } ?>
+          </ol>
+        </div>
+      </aside> <!-- /.katalog-sidebar -->
+
+    </div><!-- /.row -->
+  </main><!-- /.container -->
+</section><br><br>
