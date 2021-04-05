@@ -118,12 +118,12 @@ if (isset($_GET['data'])) {
           <div class="col-sm-7">
             <select class="form-control" id="jurusan" name="level">
               <?php
-              if ($level == "superadmin") { ?>
-                <option value="superadmin" selected>superadmin</option>
-                <option value="admin">admin</option>
+              if ($level == "Superadmin") { ?>
+                <option value="Superadmin" selected>Superadmin</option>
+                <option value="Admin">Admin</option>
               <?php } else { ?>
-                <option value="superadmin">superadmin</option>
-                <option value="admin" selected>admin</option>
+                <option value="Superadmin">Superadmin</option>
+                <option value="Admin" selected>Admin</option>
               <?php } ?>
             </select>
           </div>
