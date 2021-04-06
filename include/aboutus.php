@@ -18,7 +18,7 @@ while ($data_k = mysqli_fetch_row($query_k)) {
         <div class="row">
           <div class="col-md-9 blog-main">
             <div class="blog-post">
-            <h2 class="featurette-heading">
+            <h2 class="blog-post-title">
             <?php echo $judul_konten; ?></span></h2>
            <p class="lead"><?php echo $isi_konten; ?></p>
           </div><br><br><!-- /.blog-post -->
