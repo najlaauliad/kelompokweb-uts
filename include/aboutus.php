@@ -12,17 +12,18 @@ while ($data_k = mysqli_fetch_row($query_k)) {
         <h1 class="text-white">ABOUT US</h1>
       </div>
     </section><br><br>
+
     <section id="blog-list">
       <main role="main" class="container">
         <div class="row">
-        <div class="col-md-7">
-        <h2 class="featurette-heading">
-          <?php echo $judul_konten; ?></span></h2>
-        <p class="lead"><?php echo $isi_konten; ?></p>
-      </div>
-      <div class="col-md-5">
-        <img src="images/undraw_book_lover_mkck.png" class="img-fluid mx-auto featurette-image">
+          <div class="col-md-9 blog-main">
+            <div class="blog-post">
+            <h2 class="featurette-heading">
+            <?php echo $judul_konten; ?></span></h2>
+           <p class="lead"><?php echo $isi_konten; ?></p>
+          </div><br><br><!-- /.blog-post -->
       </div><!-- /.blog-main -->
+      
       
          
       
@@ -35,7 +36,7 @@ while ($data_k = mysqli_fetch_row($query_k)) {
                 <li><a href="#">Instagram</a></li>
               </ol>
             </div>
-          </aside>--><!-- /.blog-sidebar -->
+          
       
         </div><!-- /.row -->
       
