@@ -44,7 +44,7 @@ if (isset($_GET['data'])) {
 
             <div class="col-md-4">
               <div class="card mb-4 shadow-sm">
-                <img src="admin/cover/<?php echo $cover ?>" class="img-fluid" alt="Books Collection" title="Books">
+                <img src="admin/cover/<?php echo $cover ?>" class="img-fluid" alt="Books Collection" title="Books" style="height: 300px; object-fit: cover;">
                 <div class="card-body bg-warning">
                   <p class="card-text"><?php echo $judul_buku ?></p>
                   <div class="d-flex justify-content-between align-items-center">
