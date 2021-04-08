@@ -7,7 +7,8 @@
 </head>
 
 <body>
-  <?php include("includes/navigasi.php"); ?>
+  <?php 
+  include("includes/navigasi.php"); ?>
   <?php
   //pemanggilan konten halaman index
 
@@ -25,10 +26,12 @@
       include("include/detailblog.php");
     } else if ($include == "contact-us") {
       include("include/contactus.php");
-    } else if ($include == "daftar-buku-kategori") {
+    }else if ($include == "daftar-buku-kategori") {
       include("include/daftarbuku.php");
     } else if ($include == "daftar-buku-tag") {
-      include("include/daftarbukutag.php");
+      include("include/daftarbukutag.php"); 
+    }elseif ($include == "search") {
+      include("include/search.php");
     } else {
       include("include/index.php");
     }
