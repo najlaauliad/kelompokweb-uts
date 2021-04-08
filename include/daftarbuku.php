@@ -26,6 +26,15 @@ if (isset($_GET['data'])) {
           $sql_b = "SELECT `b`.`id_buku`, `b`.`judul`, `b`.`cover`,`p`.`penerbit` FROM `buku` `b` INNER JOIN `penerbit` `p` ON `b`.`id_penerbit` = `p`.`id_penerbit` WHERE `b`.`id_kategori_buku`= '$data' ORDER BY `b`.`id_buku`";
           //echo $sql_b;
           $query_b = mysqli_query($koneksi, $sql_b);
+
+          //notif 0 data
+          if (mysqli_num_rows($query_b) > 0) { ?>
+          <?php } else { ?>
+            <div class="col-sm-12">
+              <div class="alert alert-danger" role="alert">Data Tidak Ditemukan</div>
+            </div>
+          <?php }
+
           while ($data_b = mysqli_fetch_row($query_b)) {
             $id_buku = $data_b[0];
             $judul_buku = $data_b[1];

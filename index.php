@@ -25,6 +25,10 @@
       include("include/detailblog.php");
     } else if ($include == "contact-us") {
       include("include/contactus.php");
+    } else if ($include == "daftar-buku-kategori") {
+      include("include/daftarbuku.php");
+    } else if ($include == "daftar-buku-tag") {
+      include("include/daftarbukutag.php");
     } else {
       include("include/index.php");
     }
