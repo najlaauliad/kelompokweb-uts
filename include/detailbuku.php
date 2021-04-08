@@ -77,14 +77,12 @@ where `tb`.`id_buku`='$id_buku'";
                     $jumlah_tag = count($array_tag);
                     for ($i = 0; $i < $jumlah_tag; $i++) {
                       if ($i == ($jumlah_tag - 1)) { ?>
-                        <a href="index.php?include=daftar-buku-tag&
-<?php echo $array_idtag[$i]; ?>">
+                        <a href="index.php?include=daftar-buku-tag&data=<?php echo $array_idtag[$i]; ?>">
                           <?php echo $array_tag[$i]; ?></a>
                       <?php
                       } else { ?>
 
-                        <a href="index.php?include=daftar-buku-tag&
-<?php echo $array_idtag[$i]; ?>">
+                        <a href="index.php?include=daftar-buku-tag&data=<?php echo $array_idtag[$i]; ?>">
                           <?php echo $array_tag[$i]; ?></a>,
                       <?php
                       }
