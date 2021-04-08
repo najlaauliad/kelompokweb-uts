@@ -23,7 +23,7 @@ if (isset($_GET['data'])) {
                 <div class="row">
 
                     <?php
-                    $sql_b = "SELECT DISTINCT `b`.`id_buku`, `b`.`judul`, `b`.`cover`,`p`.`penerbit` FROM `buku` `b` INNER JOIN `penerbit` `p` ON `b`.`id_penerbit` = `p`.`id_penerbit` INNER JOIN `tag_buku` `t` ON `b`.`id_buku` = `t`.`id_buku` INNER jOIN `tag_buku` `u` ON `b`.`id_buku` = `u`.`id_buku` WHERE `u`.`id_tag` = '$data' ORDER BY `b`.`id_buku`";
+                    $sql_b = "SELECT DISTINCT `b`.`id_buku`, `b`.`judul`, `b`.`cover`,`p`.`penerbit` FROM `buku` `b` INNER JOIN `penerbit` `p` ON `b`.`id_penerbit` = `p`.`id_penerbit` INNER jOIN `tag_buku` `u` ON `b`.`id_buku` = `u`.`id_buku` WHERE `u`.`id_tag` = '$data' ORDER BY `b`.`id_buku`";
                     //echo $sql_b;
                     $query_b = mysqli_query($koneksi, $sql_b);
 
@@ -34,7 +34,7 @@ if (isset($_GET['data'])) {
                             <div class="alert alert-danger" role="alert">Data Tidak Ditemukan</div>
                         </div>
                     <?php }
-                    
+
                     while ($data_b = mysqli_fetch_row($query_b)) {
                         $id_buku = $data_b[0];
                         $judul_buku = $data_b[1];
