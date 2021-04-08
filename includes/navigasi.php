@@ -34,10 +34,11 @@
                     <a class="nav-link" href="index.php?include=contact-us">Contact Us</a>
                 </li>
             </ul>
-            <form class="form-inline mt-2 mt-md-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            <form class="form-inline mt-2 mt-md-0" method="post" action="index.php?include=search">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="katakunci">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit" name="katakunci_buku">Search</button>
             </form>
+            
         </div>
     </div>
 </nav>
