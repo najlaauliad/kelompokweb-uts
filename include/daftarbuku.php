@@ -17,14 +17,26 @@ if (isset($_GET['data'])) {
 
 <section id="katalog-item">
   <main role="main" class="container">
-    <h2 class="text-primary">CATEGORIES: <?php echo $kat; ?></h2><br><br>
+    <?php
+    if (!empty($data)) {
+      if (mysqli_num_rows($query_k) > 0) { ?>
+        <h2 class="text-primary">CATEGORIES: <?php echo $kat; ?></h2><br><br>
+      <?php } ?>
+    <?php } else { ?>
+      <h2 class="text-primary">CATEGORIES: ALL DATA</h2><br><br>
+    <?php } ?>
     <div class="row">
       <div class="col-md-9 katalog-main">
         <div class="row">
 
           <?php
-          $sql_b = "SELECT `b`.`id_buku`, `b`.`judul`, `b`.`cover`,`p`.`penerbit` FROM `buku` `b` INNER JOIN `penerbit` `p` ON `b`.`id_penerbit` = `p`.`id_penerbit` WHERE `b`.`id_kategori_buku`= '$data' ORDER BY `b`.`id_buku`";
+          $sql_b = "SELECT `b`.`id_buku`, `b`.`judul`, `b`.`cover`,`p`.`penerbit` FROM `buku` `b` INNER JOIN `penerbit` `p` ON `b`.`id_penerbit` = `p`.`id_penerbit` ";
           //echo $sql_b;
+          if (!empty($data)) {
+            $sql_b .= " WHERE `b`.`id_kategori_buku`= '$data' ORDER BY `b`.`id_buku` LIMIT 8";
+          } else {
+            $sql_b .= " LIMIT 8";
+          }
           $query_b = mysqli_query($koneksi, $sql_b);
 
           //notif 0 data

@@ -97,6 +97,7 @@ INNER JOIN `penerbit` `p` ON `b`.`id_penerbit` =
         </div>
       <?php } ?>
     </div>
+    <a href="index.php?include=daftar-buku"><button type="button" class="btn btn-success" style="margin: auto; display: block; width: 150px;">See More</button></a>
   </div>
 </section><br><br><!-- #product-item -->
 
