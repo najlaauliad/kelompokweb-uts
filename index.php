@@ -1,13 +1,13 @@
 <?php include("koneksi/koneksi.php"); ?>
 <!doctype html>
-<html lang="en">
+<html lang="en" style="scroll-behavior: smooth;">
 
 <head>
   <?php include("includes/head.php"); ?>
 </head>
 
 <body>
-  <?php 
+  <?php
   include("includes/navigasi.php"); ?>
   <?php
   //pemanggilan konten halaman index
@@ -26,11 +26,13 @@
       include("include/detailblog.php");
     } else if ($include == "contact-us") {
       include("include/contactus.php");
-    }else if ($include == "daftar-buku-kategori") {
+    } else if ($include == "daftar-buku-kategori") {
       include("include/daftarbuku.php");
     } else if ($include == "daftar-buku-tag") {
-      include("include/daftarbukutag.php"); 
-    }elseif ($include == "search") {
+      include("include/daftarbukutag.php");
+    } else if ($include == "blog-tanggal") {
+      include("include/blogtanggal.php");
+    } elseif ($include == "search") {
       include("include/search.php");
     } else {
       include("include/index.php");

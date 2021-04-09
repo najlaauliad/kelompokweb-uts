@@ -25,8 +25,8 @@ if (isset($_SESSION['katakunci_buku'])) {
           $sql_b = "SELECT `b`.`id_buku`, `b`.`judul`, `b`.`cover`, `p`.`penerbit` FROM `buku` `b`
                     INNER JOIN `kategori_buku` `k` ON `b`.`id_kategori_buku` = `k`.`id_kategori_buku`
                     INNER JOIN `penerbit` `p` ON `b`.`id_penerbit` = `p`.`id_penerbit`";
-          if (empty($katakunci_buku)) {
-            $sql_b .= " where `b`.`Judul` LIKE ' ' ";
+          if (empty($katakunci_buku) || ctype_space($katakunci_buku)) {
+            $sql_b .= " where `b`.`Judul` LIKE '' ";
           }else{
             $sql_b .= " where `b`.`Judul` LIKE '%$katakunci_buku%' ";
           }
