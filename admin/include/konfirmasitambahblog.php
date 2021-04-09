@@ -4,8 +4,7 @@ if(isset($_SESSION['id_user'])){
     $id_user = $_SESSION['id_user'];
     $tanggal = date("Y-m-d");
     $judul = $_POST['judul'];
-    $isi = $_POST['isi'];
-    echo $id_kategori_blog . $id_user . $tanggal . $judul . $isi;
+    $isi = $_POST['isi'];    
     if (empty($id_kategori_blog)) {
         header("Location:index.php?include=tambah-blog&notif=tambahkosong&jenis=kategoriblog");
     } else if (empty($judul)) {
