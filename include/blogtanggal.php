@@ -30,7 +30,7 @@ if (isset($_GET['data'])) {
                 //getData
                 $sql = "SELECT `b`.`tanggal`, `b`.`judul`, `b`.`isi`, `k`.`kategori_blog`, `u`.`nama`, `b`.`id_blog` FROM `blog` `b` INNER JOIN `kategori_blog` `k` ON `b`.`id_kategori_blog`=`k`.`id_kategori_blog` INNER JOIN `user` `u` ON `b`.`id_user`=`u`.`id_user` ";
                 if (!empty($date)) {
-                    $sql .= " WHERE MONTHNAME(`b`.`tanggal`) LIKE '%$pieces[0]%' AND YEAR(`tanggal`) LIKE '%$pieces[1]%'";
+                    $sql .= " WHERE MONTHNAME(`b`.`tanggal`) LIKE '$pieces[0]' AND YEAR(`tanggal`) LIKE '$pieces[1]'";
                 }
                 $query = mysqli_query($koneksi, $sql);
                 if (mysqli_num_rows($query) > 0) {

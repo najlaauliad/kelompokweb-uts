@@ -1,3 +1,9 @@
+<?php
+if (isset($_GET['data'])) {
+  $id_blog = $_GET['data'];
+}
+?>
+
 <section id="blog-header">
   <div class="container">
     <h1 class="text-white">BLOG</h1>
@@ -8,36 +14,28 @@
     <div class="row">
       <div class="col-md-9 blog-main">
         <div class="blog-post">
-          <h2 class="blog-post-title">Sample blog post</h2>
-          <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+          <?php
+          $sql = "SELECT `b`.`tanggal`, `b`.`judul`, `b`.`isi`, `k`.`kategori_blog`, `u`.`nama`, `b`.`id_blog` FROM `blog` `b` INNER JOIN `kategori_blog` `k` ON `b`.`id_kategori_blog`=`k`.`id_kategori_blog` INNER JOIN `user` `u` ON `b`.`id_user`=`u`.`id_user` WHERE `id_blog` LIKE '$id_blog'";
+          $query = mysqli_query($koneksi, $sql);
+          while ($data = mysqli_fetch_row($query)) {
+            $tanggal = $data[0];
+            $judul = $data[1];
+            $isi = $data[2];
+            $kategori_blog = $data[3];
+            $penulis = $data[4];
+            $id_blog = $data[5];
 
-          <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-          <hr>
-          <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-          <blockquote>
-            <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          </blockquote>
-          <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-          <h2>Heading</h2>
-          <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-          <h3>Sub-heading</h3>
-          <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-          <pre><code>Example code block</code></pre>
-          <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-          <h3>Sub-heading</h3>
-          <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <ul>
-            <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
-            <li>Donec id elit non mi porta gravida at eget metus.</li>
-            <li>Nulla vitae elit libero, a pharetra augue.</li>
-          </ul>
-          <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
-          <ol>
-            <li>Vestibulum id ligula porta felis euismod semper.</li>
-            <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
-            <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
-          </ol>
-          <p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
+            $pieces = explode("-", $tanggal);
+
+          ?>
+
+            <h2 class="blog-post-title"><?php echo $judul; ?></h2>
+            <p class="blog-post-meta"><?php echo $pieces[2] . "-" . $pieces[1] . "-" . $pieces[0] ?> by <a href="#"><?php echo $penulis; ?></a></p>
+
+            <p>Kateogori : <a href="#"><?php echo $kategori_blog; ?></a></p>
+            <hr>
+            <p><?php echo $isi; ?></p>
+          <?php } ?>
         </div><br><br><!-- /.blog-post -->
 
 
@@ -49,28 +47,30 @@
         <div class="p-4">
           <h4 class="font-italic">Categories</h4>
           <ol class="list-unstyled mb-0">
-            <li><a href="#">Umum</a></li>
-            <li><a href="#">PHP</a></li>
-            <li><a href="#">Java</a></li>
-            <li><a href="#">Database</a></li>
-            <li><a href="#">Techno</a></li>
+            <?php
+            $sql_t = "SELECT `id_kategori_blog`,`kategori_blog` FROM `kategori_blog` ORDER BY `kategori_blog`";
+            $query_t = mysqli_query($koneksi, $sql_t);
+            while ($data_t = mysqli_fetch_row($query_t)) {
+              $id_kat = $data_t[0];
+              $nama_kat = $data_t[1];
+            ?>
+              <li><a href="index.php?include=blog&data=<?php echo $id_kat; ?>">
+                  <?php echo $nama_kat; ?></a></li>
+            <?php } ?>
         </div>
 
         <div class="p-4">
           <h4 class="font-italic">Archives</h4>
           <ol class="list-unstyled mb-0">
-            <li><a href="#">March 2014</a></li>
-            <li><a href="#">February 2014</a></li>
-            <li><a href="#">January 2014</a></li>
-            <li><a href="#">December 2013</a></li>
-            <li><a href="#">November 2013</a></li>
-            <li><a href="#">October 2013</a></li>
-            <li><a href="#">September 2013</a></li>
-            <li><a href="#">August 2013</a></li>
-            <li><a href="#">July 2013</a></li>
-            <li><a href="#">June 2013</a></li>
-            <li><a href="#">May 2013</a></li>
-            <li><a href="#">April 2013</a></li>
+            <?php
+            $sql_t = "SELECT DISTINCT MONTHNAME(`tanggal`), YEAR(`tanggal`) FROM `blog` ORDER BY `tanggal`";
+            $query_t = mysqli_query($koneksi, $sql_t);
+            while ($data_t = mysqli_fetch_row($query_t)) {
+              $month = $data_t[0];
+              $year = $data_t[1];
+            ?>
+              <li><a href="index.php?include=blog-tanggal&data=<?php echo $month . "-" . $year; ?>"><?php echo $month . " " . $year; ?></a></li>
+            <?php } ?>            
           </ol>
         </div>
 
