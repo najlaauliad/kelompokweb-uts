@@ -118,7 +118,7 @@ DATE_FORMAT(`b`.`tanggal`, '%d-%m-%Y'),
 `k`.`kategori_blog` FROM `blog` `b` INNER JOIN
 `kategori_blog` `k`
 ON `b`.`id_kategori_blog` = `k`.`id_kategori_blog`
-ORDER BY `b`.`id_blog` DESC";
+ORDER BY `b`.`id_blog` DESC LIMIT 6";
       $query_l = mysqli_query($koneksi, $sql_l);
       while ($data_l = mysqli_fetch_row($query_l)) {
         $id_blog = $data_l[0];
