@@ -30,11 +30,12 @@ if (isset($_GET['data'])) {
           ?>
 
             <h2 class="blog-post-title"><?php echo $judul; ?></h2>
-            <p class="blog-post-meta"><?php echo $pieces[2] . "-" . $pieces[1] . "-" . $pieces[0] ?> by <a href="#"><?php echo $penulis; ?></a></p>
+            <p class="blog-post-meta"><?php echo $pieces[2] . "-" . $pieces[1] . "-" . $pieces[0] ?> by <a href="#" style="pointer-events: none;"><?php echo $penulis; ?></a></p>
 
-            <p>Kateogori : <a href="#"><?php echo $kategori_blog; ?></a></p>
             <hr>
             <p><?php echo $isi; ?></p>
+            <hr>
+            <p><b>Kateogori</b> : <a href="#" style="pointer-events: none;"><?php echo $kategori_blog; ?></a></p>
           <?php } ?>
         </div><br><br><!-- /.blog-post -->
 
@@ -42,7 +43,7 @@ if (isset($_GET['data'])) {
 
       </div><!-- /.blog-main -->
 
-      <aside class="col-md-3 blog-sidebar">
+      <aside class=" col-md-3 blog-sidebar">
 
         <div class="p-4">
           <h4 class="font-italic">Categories</h4>
@@ -70,7 +71,7 @@ if (isset($_GET['data'])) {
               $year = $data_t[1];
             ?>
               <li><a href="index.php?include=blog-tanggal&data=<?php echo $month . "-" . $year; ?>"><?php echo $month . " " . $year; ?></a></li>
-            <?php } ?>            
+            <?php } ?>
           </ol>
         </div>
 
