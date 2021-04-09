@@ -30,7 +30,7 @@ if (isset($_GET['data'])) {
                 //getData
                 $sql = "SELECT `b`.`tanggal`, `b`.`judul`, `b`.`isi`, `k`.`kategori_blog`, `u`.`nama`, `b`.`id_blog` FROM `blog` `b` INNER JOIN `kategori_blog` `k` ON `b`.`id_kategori_blog`=`k`.`id_kategori_blog` INNER JOIN `user` `u` ON `b`.`id_user`=`u`.`id_user` ";
                 if (!empty($date)) {
-                    $sql .= " WHERE MONTHNAME(`b`.`tanggal`) LIKE '$pieces[0]' AND YEAR(`tanggal`) LIKE '$pieces[1]'";
+                    $sql .= " WHERE MONTHNAME(`b`.`tanggal`) LIKE '$pieces[0]' AND YEAR(`tanggal`) LIKE '$pieces[1]' LIMIT 3";
                 }
                 $query = mysqli_query($koneksi, $sql);
                 if (mysqli_num_rows($query) > 0) {
@@ -53,7 +53,7 @@ if (isset($_GET['data'])) {
                             <p class="blog-post-meta"><?php echo $pieces[2] . "-" . $pieces[1] . "-" . $pieces[0]; ?> by <a href="#" style="pointer-events: none;"><?php echo $penulis; ?></a></p>
                             <!--<img src=" slideshow/slide-1.jpg" class="img-fluid" alt="Responsive image"><br><br>-->
 
-                            <p><?php echo limit_text($isi, 60); ?></p>
+                            <p><?php echo limit_text($isi, 50); ?></p>
                             <a href="index.php?include=detail-blog&data=<?php echo $id_blog ?>" class="btn btn-primary">Continue reading..</a>
                         </div><!-- /.blog-post --><br><br>
                     <?php } ?>

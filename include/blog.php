@@ -26,9 +26,11 @@ if (isset($_GET['data'])) {
         }
 
         //getData
-        $sql = "SELECT `b`.`tanggal`, `b`.`judul`, `b`.`isi`, `k`.`kategori_blog`, `u`.`nama`, `b`.`id_blog` FROM `blog` `b` INNER JOIN `kategori_blog` `k` ON `b`.`id_kategori_blog`=`k`.`id_kategori_blog` INNER JOIN `user` `u` ON `b`.`id_user`=`u`.`id_user` ";
+        $sql = "SELECT `b`.`tanggal`, `b`.`judul`, `b`.`isi`, `k`.`kategori_blog`, `u`.`nama`, `b`.`id_blog` FROM `blog` `b` INNER JOIN `kategori_blog` `k` ON `b`.`id_kategori_blog`=`k`.`id_kategori_blog` INNER JOIN `user` `u` ON `b`.`id_user`=`u`.`id_user`";
         if (!empty($kategori_blog)) {
-          $sql .= " WHERE `k`.`id_kategori_blog` LIKE '$kategori_blog'";
+          $sql .= " WHERE `k`.`id_kategori_blog` LIKE '$kategori_blog' LIMIT 3";
+        }else{
+          $sql .= " LIMIT 3";
         }
         $query = mysqli_query($koneksi, $sql);
         if (mysqli_num_rows($query) > 0) {
