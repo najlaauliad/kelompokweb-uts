@@ -5,7 +5,6 @@ if (isset($_GET['data'])) {
 }
 
 if (empty($_GET['halaman']) && empty($_GET['data'])) {
-  unset($_SESSION['katakunci_kategori']);
   unset($_SESSION['data']);
 }
 
@@ -16,11 +15,9 @@ if (isset($_SESSION['data'])) {
   while ($data_k = mysqli_fetch_row($query_k)) {
     $kat = $data_k[0];
   }
-}
-
-if (isset($_SESSION['data'])) {
   $data = $_SESSION['data'];
 }
+
 ?>
 
 <section id="blog-header">
