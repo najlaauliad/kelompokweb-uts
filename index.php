@@ -1,4 +1,6 @@
-<?php include("koneksi/koneksi.php"); ?>
+<?php include("koneksi/koneksi.php"); 
+session_start();
+?>
 <!doctype html>
 <html lang="en" style="scroll-behavior: smooth;">
 

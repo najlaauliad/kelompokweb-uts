@@ -35,7 +35,7 @@ if (isset($_GET['data'])) {
             <hr>
             <p><?php echo $isi; ?></p>
             <hr>
-            <p><b>Kateogori</b> : <a href="#" style="pointer-events: none;"><?php echo $kategori_blog; ?></a></p>
+            <p><b>Kategori</b> : <a href="#" style="pointer-events: none;"><?php echo $kategori_blog; ?></a></p>
           <?php } ?>
         </div><br><br><!-- /.blog-post -->
 
