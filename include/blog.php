@@ -94,7 +94,6 @@ if (isset($_GET['data'])) {
               $sebelum = $halaman-1;
               $setelah = $halaman+1;
               if($halaman==1) {
-                if (isset($_GET['kategori'])) {
                     echo "<a class='btn btn-outline-primary' href='index.php?include=blog&halaman=$setelah'><i class='icon-chevron-right'></i> Old</a>";
                 
               } else if($halaman==$jum_halaman) {
@@ -103,10 +102,9 @@ if (isset($_GET['data'])) {
               } elseif($halaman>1 && $halaman<$jum_halaman) {
                     echo "<a class='btn btn-outline-primary' href='index.php?include=blog&halaman=$sebelum'> <i class='icon-chevron-left'></i> New </a>";
                     echo "<a class='btn btn-outline-primary' href='index.php?include=blog&halaman=$setelah'><i class='icon-chevron-right'></i> Old</a>";
-              }
+                
               }
             }
-          
             ?>
           </nav>
         <?php } else { ?>
