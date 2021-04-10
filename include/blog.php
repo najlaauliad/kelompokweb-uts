@@ -14,6 +14,26 @@ if (isset($_GET['data'])) {
     <div class="row">
       <div class="col-md-9 blog-main">
         <?php
+
+        $batas = 2;
+        if (!isset($_GET['halaman'])) {
+          $posisi = 0;
+          $halaman = 1;
+        } else {
+          $halaman = $_GET['halaman'];
+          $posisi = ($halaman - 1) * $batas;
+        }
+        
+        $sql_jum = "select id_blog, kategori_blog.kategori_blog, `judul`, `tanggal`, user.nama 
+                  from blog 
+                  INNER JOIN kategori_blog ON blog.id_kategori_blog = kategori_blog.id_kategori_blog 
+                  INNER JOIN user ON blog.id_user = user.id_user";
+        $sql_jum .= " order by `judul`";
+        $query_jum = mysqli_query($koneksi, $sql_jum);
+        $jum_data = mysqli_num_rows($query_jum);
+        $jum_halaman = ceil($jum_data/$batas);
+
+
         //word limiter
         function limit_text($text, $limit)
         {
@@ -24,17 +44,26 @@ if (isset($_GET['data'])) {
           }
           return $text;
         }
-
+        
+        $sql_k = "SELECT `b`.`tanggal`, `b`.`judul`, `b`.`isi`, `k`.`kategori_blog`, `u`.`nama`, `b`.`id_blog` FROM `blog` `b` INNER JOIN `kategori_blog` `k` ON `b`.`id_kategori_blog`=`k`.`id_kategori_blog` INNER JOIN `user` `u` ON `b`.`id_user`=`u`.`id_user`";
+          if (!empty($katakunci_blog)) {
+            $sql_k .= " WHERE `k`.`id_kategori_blog` LIKE '$kategori_blog' LIMIT 3";
+          }
         //getData
         $sql = "SELECT `b`.`tanggal`, `b`.`judul`, `b`.`isi`, `k`.`kategori_blog`, `u`.`nama`, `b`.`id_blog` FROM `blog` `b` INNER JOIN `kategori_blog` `k` ON `b`.`id_kategori_blog`=`k`.`id_kategori_blog` INNER JOIN `user` `u` ON `b`.`id_user`=`u`.`id_user`";
         if (!empty($kategori_blog)) {
           $sql .= " WHERE `k`.`id_kategori_blog` LIKE '$kategori_blog' LIMIT 3";
         }else{
           $sql .= " LIMIT 3";
-        }
-        $query = mysqli_query($koneksi, $sql);
-        if (mysqli_num_rows($query) > 0) {
-          while ($data = mysqli_fetch_row($query)) {
+        }$query = mysqli_query($koneksi, $sql);
+
+        
+          
+          if (mysqli_num_rows($query) > 0) {
+          $sql_k .= " ORDER BY `judul` limit $posisi, $batas ";
+          $query_k = mysqli_query($koneksi, $sql_k);
+          $no = $posisi + 1;
+          while ($data = mysqli_fetch_row($query_k)) {
             $tanggal = $data[0];
             $judul = $data[1];
             $isi = $data[2];
@@ -54,10 +83,31 @@ if (isset($_GET['data'])) {
               <p><?php echo limit_text($isi, 50); ?></p>
               <a href="index.php?include=detail-blog&data=<?php echo $id_blog ?>" class="btn btn-primary">Continue reading..</a>
             </div><!-- /.blog-post --><br><br>
-          <?php } ?>
+          <?php  } ?>
           <nav class="blog-pagination">
-            <a class="btn btn-outline-primary" href="#">Older</a>
-            <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
+          <?php
+            if ($jum_halaman==0) {
+              //tidak ada halaman
+            } elseif ($jum_halaman==1) {
+
+            } else {
+              $sebelum = $halaman-1;
+              $setelah = $halaman+1;
+              if($halaman==1) {
+                if (isset($_GET['kategori'])) {
+                    echo "<a class='btn btn-outline-primary' href='index.php?include=blog&halaman=$setelah'><i class='icon-chevron-right'></i> Old</a>";
+                
+              } else if($halaman==$jum_halaman) {
+                    echo "<a class='btn btn-outline-primary' href='index.php?include=blog&halaman=$sebelum'> <i class='icon-chevron-left'></i> New </a>";
+                
+              } elseif($halaman>1 && $halaman<$jum_halaman) {
+                    echo "<a class='btn btn-outline-primary' href='index.php?include=blog&halaman=$sebelum'> <i class='icon-chevron-left'></i> New </a>";
+                    echo "<a class='btn btn-outline-primary' href='index.php?include=blog&halaman=$setelah'><i class='icon-chevron-right'></i> Old</a>";
+              }
+              }
+            }
+          
+            ?>
           </nav>
         <?php } else { ?>
           <div class="col-sm-12">
@@ -74,7 +124,7 @@ if (isset($_GET['data'])) {
         <div class="p-4">
           <h4 class="font-italic">Categories</h4>
           <ol class="list-unstyled mb-0">
-            <?php
+          <?php
             $sql_t = "SELECT `id_kategori_blog`,`kategori_blog` FROM `kategori_blog` ORDER BY `kategori_blog`";
             $query_t = mysqli_query($koneksi, $sql_t);
             while ($data_t = mysqli_fetch_row($query_t)) {
