@@ -2,6 +2,11 @@
 if (isset($_GET['data'])) {
   $id_buku = $_GET['data'];
 }
+
+if (empty($_GET['data'])) {
+  header("Location:index.php");
+}
+?>
 ?>
 
 <section id="blog-header">

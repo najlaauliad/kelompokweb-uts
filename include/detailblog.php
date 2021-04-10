@@ -1,6 +1,10 @@
 <?php
 if (isset($_GET['data'])) {
   $id_blog = $_GET['data'];
+} 
+
+if(empty($_GET['data'])){
+  header("Location:index.php");
 }
 ?>
 
