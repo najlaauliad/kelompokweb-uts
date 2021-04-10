@@ -1,14 +1,28 @@
 <?php
 if (isset($_GET['data'])) {
   $data = $_GET['data'];
+  $_SESSION['data'] = $data;
+}
 
-  $sql_k = "SELECT `kategori_buku` FROM `kategori_buku` WHERE `id_kategori_buku`= '$data'";
+if (empty($_GET['halaman']) && empty($_GET['data'])) {
+  unset($_SESSION['katakunci_kategori']);
+  unset($_SESSION['data']);
+}
+
+if (isset($_SESSION['data'])) {
+  $id_kat = $_SESSION['data'];
+  $sql_k = "SELECT `kategori_buku` FROM `kategori_buku` WHERE `id_kategori_buku`= '$id_kat'";
   $query_k = mysqli_query($koneksi, $sql_k);
   while ($data_k = mysqli_fetch_row($query_k)) {
     $kat = $data_k[0];
   }
 }
+
+if (isset($_SESSION['data'])) {
+  $data = $_SESSION['data'];
+}
 ?>
+
 <section id="blog-header">
   <div class="container">
     <h1 class="text-white">DAFTAR BUKU</h1>
@@ -18,7 +32,7 @@ if (isset($_GET['data'])) {
 <section id="katalog-item">
   <main role="main" class="container">
     <?php
-    if (!empty($data)) {
+    if (isset($_SESSION['data'])) {
       if (mysqli_num_rows($query_k) > 0) { ?>
         <h2 class="text-primary">CATEGORIES: <?php echo $kat; ?></h2><br><br>
       <?php } ?>
@@ -29,14 +43,38 @@ if (isset($_GET['data'])) {
       <div class="col-md-9 katalog-main">
         <div class="row">
 
+          <!-- limit -->
+          <?php
+          $batas = 2;
+          if (!isset($_GET['halaman'])) {
+            $posisi = 0;
+            $halaman = 1;
+          } else {
+            $halaman = $_GET['halaman'];
+            if (!empty($halaman)) {
+              $posisi = ($halaman - 1) * $batas;
+            } else {
+              $posisi = 0;
+              $halaman = 1;
+            }
+          }
+
+          //hitung jumlah semua data
+          $sql_jum = "SELECT `b`.`id_buku`, `b`.`judul`, `b`.`cover`,`p`.`penerbit` FROM `buku` `b` INNER JOIN `penerbit` `p` ON `b`.`id_penerbit` = `p`.`id_penerbit` ";
+          if (!empty($data)) {
+            $sql_jum .= " WHERE `b`.`id_kategori_buku`= '$data'";
+          }
+          $query_jum = mysqli_query($koneksi, $sql_jum);
+          $jum_data = mysqli_num_rows($query_jum);
+          $jum_halaman = ceil($jum_data / $batas); ?>
+
           <?php
           $sql_b = "SELECT `b`.`id_buku`, `b`.`judul`, `b`.`cover`,`p`.`penerbit` FROM `buku` `b` INNER JOIN `penerbit` `p` ON `b`.`id_penerbit` = `p`.`id_penerbit` ";
           //echo $sql_b;
           if (!empty($data)) {
-            $sql_b .= " WHERE `b`.`id_kategori_buku`= '$data' ORDER BY `b`.`id_buku` LIMIT 8";
-          } else {
-            $sql_b .= " LIMIT 8";
+            $sql_b .= " WHERE `b`.`id_kategori_buku`= '$data' ";
           }
+          $sql_b .= " ORDER BY `b`.`judul` LIMIT $posisi, $batas";
           $query_b = mysqli_query($koneksi, $sql_b);
 
           //notif 0 data
@@ -70,6 +108,34 @@ if (isset($_GET['data'])) {
             </div>
           <?php } ?>
         </div><!-- .row-->
+        <ul class="pagination pagination-sm m-0 float-right">
+          <?php
+          if ($jum_halaman == 0) {
+            //tidak ada halaman
+          } else if ($jum_halaman == 1) {
+            echo "<li class='page-item'><a class='page-link'>1</a></li>";
+          } else {
+            $sebelum = $halaman - 1;
+            $setelah = $halaman + 1;
+            if ($halaman != 1) {
+              echo "<li class='page-item'><a class='page-link'href='index.php?include=daftar-buku&halaman=1'>First</a></li>";
+              echo "<li class='page-item'><a class='page-link'href='index.php?include=daftar-buku&halaman=$sebelum'>«</a></li>";
+            }
+            for ($i = 1; $i <= $jum_halaman; $i++) {
+              if ($i > $halaman - 5 and $i < $halaman + 5) {
+                if ($i != $halaman) {
+                  echo "<li class='page-item'><a class='page-link'href='index.php?include=daftar-buku&halaman=$i'>$i</a></li>";
+                } else {
+                  echo "<li class='page-item'><a class='page-link'>$i</a></li>";
+                }
+              }
+            }
+            if ($halaman != $jum_halaman) {
+              echo "<li class='page-item'><a class='page-link'href='index.php?include=daftar-buku&halaman=$setelah'>»</a></li>";
+              echo "<li class='page-item'><a class='page-link'href='index.php?include=daftar-buku&halaman=$jum_halaman'>Last</a></li>";
+            }
+          } ?>
+        </ul>
       </div><!-- /.katalog-main -->
 
       <aside class="col-md-3 katalog-sidebar">
