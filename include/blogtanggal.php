@@ -1,9 +1,30 @@
 <?php
 if (isset($_GET['data'])) {
     $date = $_GET['data'];
-
-    $pieces = explode("-", $date);
 }
+
+if (!empty($date)) {
+    if (strpos($date, '-')) {
+        $pieces = explode("-", $date);
+        $pieces1 = $pieces[0];
+        $pieces2 = $pieces[1];
+
+        $_SESSION['pieces1'] = $pieces1;
+        $_SESSION['pieces2'] = $pieces2;
+    } else if (empty($_GET['halaman']) && !strpos($date, '-')) {
+        unset($_SESSION['pieces1']);
+        unset($_SESSION['pieces2']);
+    }
+} else if (empty($_GET['halaman']) && empty($date)) {
+    unset($_SESSION['pieces1']);
+    unset($_SESSION['pieces2']);
+}
+
+if (isset($_SESSION['pieces1']) && isset($_SESSION['pieces2'])) {
+    $bulan = $_SESSION['pieces1'];
+    $tahun = $_SESSION['pieces2'];
+}
+
 ?>
 
 <section id="blog-header">
@@ -27,14 +48,39 @@ if (isset($_GET['data'])) {
                     return $text;
                 }
 
+                //limit
+                $batas = 2;
+                if (!isset($_GET['halaman'])) {
+                    $posisi = 0;
+                    $halaman = 1;
+                } else {
+                    $halaman = $_GET['halaman'];
+                    if (!empty($halaman)) {
+                        $posisi = ($halaman - 1) * $batas;
+                    } else {
+                        $posisi = 0;
+                        $halaman = 1;
+                    }
+                }
+
+                //hitung jumlah semua data
+                $sql_jum = "SELECT `b`.`tanggal`, `b`.`judul`, `b`.`isi`, `k`.`kategori_blog`, `u`.`nama`, `b`.`id_blog` FROM `blog` `b` INNER JOIN `kategori_blog` `k` ON `b`.`id_kategori_blog`=`k`.`id_kategori_blog` INNER JOIN `user` `u` ON `b`.`id_user`=`u`.`id_user`";
+                if (!empty($bulan) && !empty($tahun)) {
+                    $sql_jum .= " WHERE MONTHNAME(`b`.`tanggal`) LIKE '$bulan' AND YEAR(`b`.`tanggal`) LIKE '$tahun' ";
+                }
+                $sql_jum .= " ORDER BY `tanggal` ";
+                $query_jum = mysqli_query($koneksi, $sql_jum);
+                $jum_data = mysqli_num_rows($query_jum);
+                $jum_halaman = ceil($jum_data / $batas);
+
                 //getData
                 $sql = "SELECT `b`.`tanggal`, `b`.`judul`, `b`.`isi`, `k`.`kategori_blog`, `u`.`nama`, `b`.`id_blog` FROM `blog` `b` INNER JOIN `kategori_blog` `k` ON `b`.`id_kategori_blog`=`k`.`id_kategori_blog` INNER JOIN `user` `u` ON `b`.`id_user`=`u`.`id_user` ";
-                if (!empty($date)) {
-                    $sql .= " WHERE MONTHNAME(`b`.`tanggal`) LIKE '$pieces[0]' AND YEAR(`tanggal`) LIKE '$pieces[1]' LIMIT 3";
-                }else{
-                    $sql .= " LIMIT 3";
+                if (!empty($bulan) && !empty($tahun)) {
+                    $sql .= " WHERE MONTHNAME(`b`.`tanggal`) LIKE '$bulan' AND YEAR(`b`.`tanggal`) LIKE '$tahun' ";
                 }
+                $sql .= " ORDER BY `tanggal` LIMIT $posisi, $batas";
                 $query = mysqli_query($koneksi, $sql);
+
                 if (mysqli_num_rows($query) > 0) {
                     while ($data = mysqli_fetch_row($query)) {
                         $tanggal = $data[0];
@@ -60,8 +106,33 @@ if (isset($_GET['data'])) {
                         </div><!-- /.blog-post --><br><br>
                     <?php } ?>
                     <nav class="blog-pagination">
-                        <a class="btn btn-outline-primary" href="#">Older</a>
-                        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
+                        <?php
+                        if ($jum_halaman == 0) {
+                            //tidak ada halaman
+                        } else if ($jum_halaman == 1) {
+                            //tidak ada halaman
+                        } else {
+                            $sebelum = $halaman - 1;
+                            $setelah = $halaman + 1;
+
+                            if ($jum_halaman > 1) {
+                                if ($halaman == $jum_halaman) {
+                                    echo "<a class='btn btn-outline-primary' href='index.php?include=blog-tanggal&halaman=$sebelum'>Older</a>";
+                                    echo " ";
+                                    echo "<a class='btn btn-outline-secondary disabled' href='#'>Newer</a>";
+                                } else {
+                                    if ($halaman != 1) {
+                                        echo "<a class='btn btn-outline-primary' href='index.php?include=blog-tanggal&halaman=$sebelum'>Older</a>";
+                                        echo " ";
+                                        echo "<a class='btn btn-outline-primary' href='index.php?include=blog-tanggal&halaman=$setelah' tabindex='-1' aria-disabled='true'>Newer</a>";
+                                    } else {
+                                        echo "<a class='btn btn-outline-secondary disabled' href='index.php?include=blog-tanggal&halaman=$sebelum'>Older</a>";
+                                        echo " ";
+                                        echo "<a class='btn btn-outline-primary' href='index.php?include=blog-tanggal&halaman=$setelah' tabindex='-1' aria-disabled='true'>Newer</a>";
+                                    }
+                                }
+                            }
+                        } ?>
                     </nav>
                 <?php } else { ?>
                     <div class="col-sm-12">

@@ -3,7 +3,10 @@
 if (isset($_GET['data'])) {
   $kategori_blog = $_GET['data'];
   $_SESSION['katakunci_kategori'] = $kategori_blog;
+} else if (empty($kategori_blog) && empty($_GET['halaman'])) {
+  unset($_SESSION['katakunci_kategori']);
 }
+
 if (isset($_SESSION['katakunci_kategori'])) {
   $katakunci_kategori = $_SESSION['katakunci_kategori'];
 }
@@ -37,7 +40,12 @@ if (isset($_SESSION['katakunci_kategori'])) {
           $halaman = 1;
         } else {
           $halaman = $_GET['halaman'];
-          $posisi = ($halaman - 1) * $batas;
+          if (!empty($halaman)) {
+            $posisi = ($halaman - 1) * $batas;
+          } else {
+            $posisi = 0;
+            $halaman = 1;
+          }
         }
 
         //hitung jumlah semua data
