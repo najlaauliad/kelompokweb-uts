@@ -3,7 +3,7 @@ if (isset($_SESSION['id_blog'])) {
     $id_blog = $_SESSION['id_blog'];
     $id_kategori_blog = $_POST['kategori_blog'];
     $judul = $_POST['judul'];
-    $isi = $_POST['isi'];
+    $isi = strip_tags(addslashes($_POST['isi']));
 
     if (empty($id_kategori_blog)) {
         header("Location:index.php?include=edit-blog&data=$id_blog&notif=editkosong&jenis=kategoriblog");

@@ -6,7 +6,7 @@ if (isset($_SESSION['id_buku'])) {
     $pengarang = $_POST['pengarang'];
     $id_penerbit = $_POST['penerbit'];
     $tahun_terbit = $_POST['tahun_terbit'];
-    $sinopsis = addslashes($_POST['sinopsis']);
+    $sinopsis = strip_tags(addslashes($_POST['sinopsis']));
     $tag = $_POST['tag'];
     $lokasi_file = $_FILES['cover']['tmp_name'];
     $nama_file = $_FILES['cover']['name'];
